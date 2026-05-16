@@ -1,0 +1,360 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tai app DoAnVinhKhanh</title>
+  <style>
+    :root {
+      --bg: #f7f2e8;
+      --panel: #fffdf8;
+      --text: #1f2937;
+      --muted: #586174;
+      --accent: #b45309;
+      --line: #eadfce;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #fff7ed 0, transparent 30%),
+        linear-gradient(180deg, #f8f3ea 0%, #efe4d3 100%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+
+    .card {
+      background: rgba(255, 253, 248, 0.95);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 18px 40px rgba(84, 54, 24, 0.08);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.1;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .box {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #b45309, #d97706);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .mono {
+      display: block;
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #f8f5ef;
+      color: #7c2d12;
+      font-family: Consolas, monospace;
+      word-break: break-all;
+    }
+
+    .qr {
+      display: block;
+      width: min(100%, 260px);
+      height: auto;
+      margin: 14px auto 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 12px;
+    }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .status {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #fff7ed;
+      border: 1px solid var(--line);
+      color: #7c2d12;
+      font-family: Consolas, monospace;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    video#qrVideo {
+      width: min(100%, 360px);
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: #111;
+      display: none;
+      margin: 12px auto 0;
+    }
+
+    .btnRow {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 760px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <h1>Tai app DoAnVinhKhanh</h1>
+      <p>
+        Folder nay duoc tao tu chinh mobile project. Sau khi build, chi can lay file
+        <strong>DoAnVinhKhanh.apk</strong> trong cung thu muc nay de up len GitHub Pages.
+      </p>
+
+      <div class="grid">
+        <div class="box">
+          <h2>APK de tai</h2>
+          <p>Neu da dong bo xong, bam nut duoi day de tai APK.</p>
+          <a class="btn" href="DoAnVinhKhanh.apk?v=20260424-221601" download="DoAnVinhKhanh.apk">
+            Tai DoAnVinhKhanh.apk
+          </a>
+          <span class="mono">DoAnVinhKhanh.apk?v=20260424-221601</span>
+        </div>
+
+        <div class="box">
+          <h2>Ban can up len GitHub</h2>
+          <ul>
+            <li><strong>DoAnVinhKhanh.apk</strong></li>
+            <li><strong>index.html</strong></li>
+            <li><strong>qr-doanvinhkhanh.png</strong></li>
+            <li><strong>.nojekyll</strong></li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h2>Ma QR</h2>
+          <p>Quet ma nay de mo trang tai app.</p>
+          <img class="qr" src="qr-doanvinhkhanh.png" alt="Ma QR tai app DoAnVinhKhanh">
+          <span class="mono">https://bear-2106.github.io/doanvinhkhanh-download/</span>
+
+          <div class="btnRow">
+            <button id="startScanBtn" class="btn" type="button">Mo may quet QR</button>
+            <button id="stopScanBtn" class="btn" type="button" style="display:none;background:linear-gradient(135deg,#7c2d12,#b91c1c)">Dung quet</button>
+          </div>
+          <video id="qrVideo" playsinline></video>
+          <div id="scanStatus" class="status" style="display:none"></div>
+          <div class="hint">
+            Khi bam "Mo may quet QR", trang se kiem tra nhanh thiet bi (manh/yeu) dua tren CPU/RAM uoc luong va kha nang camera (do phan giai/FPS),
+            sau do moi tien hanh doc ma.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const els = {
+      startBtn: document.getElementById("startScanBtn"),
+      stopBtn: document.getElementById("stopScanBtn"),
+      video: document.getElementById("qrVideo"),
+      status: document.getElementById("scanStatus"),
+    };
+
+    let scanStream = null;
+    let scanTimer = null;
+    let barcodeDetector = null;
+
+    function setStatus(text) {
+      els.status.style.display = "block";
+      els.status.textContent = text;
+    }
+
+    function clearStatus() {
+      els.status.style.display = "none";
+      els.status.textContent = "";
+    }
+
+    function classifyScanner({ cores, memGB, width, height, fps }) {
+      // Heuristic don gian: phan loai nhanh de biet thiet bi quet manh hay yeu.
+      const hasGoodCpu = (cores || 0) >= 4;
+      const hasGoodMem = (memGB || 0) >= 4;
+      const hasGoodCameraRes = (width || 0) >= 1280 && (height || 0) >= 720;
+      const hasGoodFps = (fps || 0) >= 24;
+
+      const score =
+        (hasGoodCpu ? 1 : 0) +
+        (hasGoodMem ? 1 : 0) +
+        (hasGoodCameraRes ? 1 : 0) +
+        (hasGoodFps ? 1 : 0);
+
+      return score >= 3 ? "MANH" : "YEU";
+    }
+
+    async function startScan() {
+      clearStatus();
+
+      if (!("mediaDevices" in navigator) || !navigator.mediaDevices.getUserMedia) {
+        setStatus("Trinh duyet khong ho tro camera (getUserMedia).");
+        return;
+      }
+
+      if (!("BarcodeDetector" in window)) {
+        setStatus("Trinh duyet khong ho tro BarcodeDetector. Hay dung Chrome/Edge tren Android de quet QR.");
+        return;
+      }
+
+      if (!barcodeDetector) {
+        try {
+          barcodeDetector = new BarcodeDetector({ formats: ["qr_code"] });
+        } catch {
+          setStatus("Khong khoi tao duoc BarcodeDetector.");
+          return;
+        }
+      }
+
+      try {
+        scanStream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: { ideal: "environment" },
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+          },
+          audio: false,
+        });
+      } catch {
+        setStatus("Khong mo duoc camera. Hay cap quyen camera cho trang nay.");
+        return;
+      }
+
+      els.video.srcObject = scanStream;
+      els.video.style.display = "block";
+
+      try {
+        await els.video.play();
+      } catch {
+        stopScan();
+        setStatus("Khong the phat video camera (autoplay/permission).");
+        return;
+      }
+
+      const track = scanStream.getVideoTracks()[0];
+      const settings = track && track.getSettings ? track.getSettings() : {};
+
+      const cores = navigator.hardwareConcurrency || 0;
+      const memGB = navigator.deviceMemory || 0; // co the khong co tren moi trinh duyet
+      const width = settings.width || 0;
+      const height = settings.height || 0;
+      const fps = settings.frameRate || 0;
+
+      const level = classifyScanner({ cores, memGB, width, height, fps });
+
+      setStatus([
+        `May quet: ${level}`,
+        `CPU cores: ${cores || "khong ro"}`,
+        `RAM uoc luong: ${memGB ? (memGB + "GB") : "khong ro"}`,
+        `Camera: ${width && height ? (width + "x" + height) : "khong ro"} @ ${fps || "khong ro"}fps`,
+        "Dang quet...",
+      ].join("\n"));
+
+      els.startBtn.style.display = "none";
+      els.stopBtn.style.display = "inline-block";
+
+      scanTimer = window.setInterval(async () => {
+        if (!barcodeDetector || !els.video || els.video.readyState < 2) return;
+        try {
+          const barcodes = await barcodeDetector.detect(els.video);
+          if (!barcodes || !barcodes.length) return;
+
+          const value = barcodes[0].rawValue || "";
+          if (!value) return;
+
+          setStatus(els.status.textContent.replace(/\nDang quet\.\.\.\s*$/m, "") + "\nDa quet duoc: " + value);
+          stopScan(false);
+
+          if (/^https?:\/\//i.test(value)) {
+            window.location.href = value;
+          }
+        } catch {
+          // ignore transient detector errors
+        }
+      }, 250);
+    }
+
+    function stopScan(clear = true) {
+      if (scanTimer) {
+        window.clearInterval(scanTimer);
+        scanTimer = null;
+      }
+
+      if (scanStream) {
+        for (const track of scanStream.getTracks()) track.stop();
+        scanStream = null;
+      }
+
+      els.video.pause();
+      els.video.srcObject = null;
+      els.video.style.display = "none";
+
+      els.startBtn.style.display = "inline-block";
+      els.stopBtn.style.display = "none";
+
+      if (clear) clearStatus();
+    }
+
+    els.startBtn.addEventListener("click", startScan);
+    els.stopBtn.addEventListener("click", () => stopScan(true));
+    window.addEventListener("pagehide", () => stopScan(true));
+  </script>
+</body>
+</html>
+
+
